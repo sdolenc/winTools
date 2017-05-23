@@ -10,10 +10,9 @@ todo: elevate to admin
 # Choco
 powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 
---
-
 todo: git
 choco install visualstudiocode -y
+
 todo: npp install + configuration (regenerate)
 
 :: install browsers
@@ -21,6 +20,8 @@ choco install firefox -y
 choco install googlechrome -y
 
 copy /y edge.lnk %windir%\system32
+
+--
 
 remote in w/ 2+ monitors. taskbar settings:
     small
