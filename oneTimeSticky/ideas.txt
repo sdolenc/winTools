@@ -1,0 +1,28 @@
+pushd %~dp0
+powershell -Command "& { Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned }"
+
+#if needed
+powershell -Command "& { dir *.ps*1 | Unblock-File }"
+powershell -File .\install.ps1
+todo: elevate to admin
+
+# Choco
+powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+
+--
+
+todo: git
+choco install visualstudiocode -y
+todo: npp install + configuration (regenerate)
+
+:: install browsers
+choco install firefox -y
+choco install googlechrome -y
+
+copy /y edge.lnk %windir%\system32
+
+remote in w/ 2+ monitors. taskbar settings:
+    small
+    programs on monitor they appear
+    combine when full 2x
+    pin npp
