@@ -2,8 +2,9 @@ pushd %~dp0
 powershell -Command "& { Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned }"
 
 #if needed
-powershell -Command "& { dir *.ps*1 | Unblock-File }"
-powershell -File .\install.ps1
+    powershell -Command "& { dir *.ps*1 | Unblock-File }"
+    powershell -File .\install.ps1
+
 todo: elevate to admin
 
 # Choco
