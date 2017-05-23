@@ -7,3 +7,4 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.
 
 :: Restore previous path bgefore script
 popd
+
