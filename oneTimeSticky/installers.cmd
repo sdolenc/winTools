@@ -7,8 +7,7 @@ NET FILE 1>NUL 2>NUL
 if '%errorlevel%' == '0' (
     echo "Already Admin"
 ) else (
-    powershell "saps -filepath %0 -verb runas" >nul 2>&1
-    exit /b
+    powershell "saps -filepath %0 -verb runas" >nul 2>&1 && exit /b
 )
 
 :: Choco
