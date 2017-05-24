@@ -1,7 +1,4 @@
 
-:: Get timestamp string. NOTE: if you're executing this particular command outside of batch file (directly in CLI prompt) then swap both %% with %
-for /F "usebackq tokens=1" %%i in (`powershell "(Get-Date).ToString('yyy-MMdd-HHmm')"`) do set dateString=%%i
-
 :: Move working directory to current script path
 pushd %~dp0
 
@@ -17,11 +14,14 @@ if '%errorlevel%' == '0' (
 powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 
 :: Programs
-choco install -y git
+choco install -y git && SET "PATH=%PATH%;%ProgramFiles%\Git\cmd"
 choco install -y visualstudiocode
 choco install -y notepadplusplus
 choco install -y firefox
 choco install -y googlechrome
+
+:: Get timestamp string. NOTE: if you're executing this particular command outside of batch file (directly in CLI prompt) then swap both %% with %
+for /F "usebackq tokens=1" %%i in (`powershell "(Get-Date).ToString('yyy-MMdd-HHmm')"`) do set dateString=%%i
 
 :: Change working directory to configuration folder. If needed, clone repo.
 if EXIST "configFiles\" (
@@ -34,7 +34,8 @@ if EXIST "configFiles\" (
 :: Configurations
 :: "edge" from run box can open browser.
 copy /y edge.lnk %windir%\system32
-choco install -y sourcecodepro
+:: this install is particularly noisy. let's write it to a file rather than the console.
+choco install -y sourcecodepro > %tmp%/%dateString%.txt
 ::todo: n++ configuration
 
 popd
