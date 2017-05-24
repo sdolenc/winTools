@@ -17,8 +17,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.
 choco install -y git && SET "PATH=%PATH%;%ProgramFiles%\Git\cmd"
 choco install -y visualstudiocode
 choco install -y notepadplusplus
-choco install -y firefox
-choco install -y googlechrome
+::todo: reactivate
+::choco install -y firefox
+::choco install -y googlechrome
 
 :: Get timestamp string. NOTE: if you're executing this particular command outside of batch file (directly in CLI prompt) then swap both %% with %
 for /F "usebackq tokens=1" %%i in (`powershell "(Get-Date).ToString('yyy-MMdd-HHmm')"`) do set dateString=%%i
@@ -28,14 +29,14 @@ if EXIST "configFiles\" (
     pushd configFiles
 ) else (
     :: todo: path hardcoding is a bad idea
-    git clone https://github.com/sdolenc/winTools.git %tmp%/%dateString% && pushd %tmp%/%dateString%/oneTimeSticky/configFiles
+    git clone https://github.com/sdolenc/winTools.git %tmp%\%dateString% && pushd %tmp%\%dateString%\oneTimeSticky\configFiles
 )
 
 :: Configurations
 :: "edge" from run box can open browser.
 copy /y edge.lnk %windir%\system32
 :: this install is particularly noisy. let's write it to a file rather than the console.
-choco install -y sourcecodepro > %tmp%/%dateString%.txt
+choco install -y sourcecodepro > %tmp%\%dateString%.txt
 ::todo: n++ configuration
 
 popd
