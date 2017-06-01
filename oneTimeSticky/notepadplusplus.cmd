@@ -19,13 +19,36 @@
 :: opened files (notepad++ session)
 ::     open C:\Windows\System32\drivers\etc\hosts
 
+:: Move working directory to current script path
+pushd %~dp0
+
+:: Elevate
+NET FILE 1>NUL 2>NUL
+if '%errorlevel%' == '0' (
+    echo "Already Admin"
+) else (
+    echo "Re-launching tool as elevated" && powershell "saps -filepath %0 -verb runas" >nul 2>&1 && popd && exit /b
+)
+
 :: Get timestamp string. NOTE: if you're executing this particular command outside of batch file (directly in CLI prompt) then swap both %% with %
+:: todo:optimization take this as a parameter (argument) and only generate this string when param is empty.
 for /F "usebackq tokens=1" %%i in (`powershell "(Get-Date).ToString('yyy-MMdd-HHmm')"`) do set dateString=%%i
 
 :: install font. this is particularly noisy. write it to a temp file instead to console.
 choco install -y sourcecodepro > %tmp%\%dateString%.txt
-:: install n++
-choco install -y notepadplusplus
+:: install n++.
+::  - We opt for 32bit for plugins.
+::  - We snap to a specific version rather than latest so we can confidentally override settings.
+choco install -y notepadplusplus --x86 --version 7.4.1
+
+:: Change working directory to configuration folder. If needed, clone repo.
+if EXIST "configFiles\" (
+    pushd configFiles
+) else (
+    :: todo: path hardcoding is a bad idea
+    :: todo:edgeCase ensure destination directory doesn't already exist before cloning to it (or just try pushd'ing into it if it does exist)
+    git clone https://github.com/sdolenc/winTools.git %tmp%\%dateString% && pushd %tmp%\%dateString%\oneTimeSticky\configFiles
+)
 
 ::todo:everything below.
 :: create backup directory name
@@ -56,3 +79,9 @@ pushd %fromDir%
 copy /Y *.xml %toDir%
 copy /Y *.ini %toDir%
 popd
+
+popd
+
+popd
+
+pause
