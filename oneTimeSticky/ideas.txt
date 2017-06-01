@@ -4,3 +4,30 @@ remote in w/ 2+ monitors. taskbar settings:
     programs on monitor they appear
     combine when full 2x
     pin npp
+
+<plugin name="Compare"><unicodeVersion>2.0.0</unicodeVersion><description>A very useful compare plugin to show the differences between 2 files (side by side).</description><author>Ty Landercasper, Jean-Sebastien Leroy, Pavel Nedev</author><homepage>https://github.com/jsleroy/compare-plugin</homepage>
+<sourceUrl>https://github.com/jsleroy/compare-plugin</sourceUrl>
+<install><unicode>
+<download>https://github.com/pnedev/compare-plugin/releases/download/v2.0.0/ComparePlugin_v2.0.0_x86.zip</download>
+<copy from="ComparePlugin.dll" to="$PLUGINDIR$\" validate="true" recursive="true"/>
+<copy from="ComparePlugin\*.*" to="$PLUGINDIR$\ComparePlugin\" validate="true" recursive="true"/></unicode></install>
+<remove><unicode><delete file="$PLUGINDIR$\ComparePlugin.dll"/><delete file="$PLUGINDIR$\ComparePlugin\*.*"/><delete file="$PLUGINDIR$\ComparePlugin"/></unicode></remove></plugin>
+
+<install><unicode>
+<download>https://github.com/pnedev/compare-plugin/releases/download/v2.0.0/ComparePlugin_v2.0.0_x86.zip</download>
+<copy from="ComparePlugin.dll" to="$PLUGINDIR$\" validate="true" recursive="true"/>
+<copy from="ComparePlugin\*.*" to="$PLUGINDIR$\ComparePlugin\" validate="true" recursive="true"/></unicode></install>
+
+<plugin name="JSTool"><ansiVersion>1.20.2</ansiVersion><unicodeVersion>1.20.2</unicodeVersion><aliases><alias name="JSMin"/></aliases><description>A javascript plugin for Notepad++.\n * Douglas Crockford's JSMin algorithm to minimize javascript code.\n * My own algorithm to format javascript code.\n * A JSON data viewer. This JSON data viewer can handle &gt;10MB JSON file easily.\n * Support 64bit Notepad++ (from version 1.20.0).\nReally helpful to javascript coder on Notepad++ and really easy to use it.\nMade in China.</description><author>Sun Junwen</author><homepage>http://www.sunjw.us/jstoolnpp</homepage>
+<sourceUrl>https://github.com/sunjw/jstoolnpp</sourceUrl><latestUpdate>Fix 64bit version crash on some Windows 10 system.\nBetter `...`, '...' and "..." format.</latestUpdate><stability>Good</stability>
+<install><unicode>
+<download>http://sourceforge.net/projects/jsminnpp/files/Uni/JSToolNPP.1.20.2.uni.32.zip/download</download>
+<copy from="JSMinNPP.dll" to="$PLUGINDIR$\" validate="true"/></unicode>
+<ansi><download>http://sourceforge.net/projects/jsminnpp/files/Asc/JSToolNPP.1.20.2.asc.32.zip/download</download>
+<copy from="JSMinNPP.dll" to="$PLUGINDIR$\" validate="true"/></ansi></install></plugin>
+
+<install><unicode>
+<download>http://sourceforge.net/projects/jsminnpp/files/Uni/JSToolNPP.1.20.2.uni.32.zip/download</download>
+<copy from="JSMinNPP.dll" to="$PLUGINDIR$\" validate="true"/></unicode>
+<ansi><download>http://sourceforge.net/projects/jsminnpp/files/Asc/JSToolNPP.1.20.2.asc.32.zip/download</download>
+<copy from="JSMinNPP.dll" to="$PLUGINDIR$\" validate="true"/></ansi></install></plugin>

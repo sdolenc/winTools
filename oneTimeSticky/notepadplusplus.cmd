@@ -1,12 +1,13 @@
+::@echo off
 
 :: NotepadPlusPlus install, settings, and plugins. Called by installers.cmd, but can be run directly
-:: NOTE: requires chocolatey, elevated with admin rights
+:: NOTE: requires chocolatey (choco)
 
 :: The manual steps for the same operations:
 :: installs
 ::     notepad++
 ::     sourcecodepro font
-:: notepad++ plugins
+:: notepad++ plugins (todo: see ideas.txt)
 ::     compare for diffing
 ::     jstool for json (un)minifying
 :: notepad++ settings
@@ -38,7 +39,7 @@ for /F "usebackq tokens=1" %%i in (`powershell "(Get-Date).ToString('yyy-MMdd-HH
 choco install -y sourcecodepro > %tmp%\%dateString%.txt
 :: install n++.
 ::  - We opt for 32bit for plugins.
-::  - We snap to a specific version rather than latest so we can confidentally override settings.
+::  - We snap to a specific version rather than latest so we can confidentally override settings and install plugins. We can change the version, but basic verification is important.
 choco install -y notepadplusplus --x86 --version 7.4.1
 
 :: Change working directory to configuration folder. If needed, clone repo.
