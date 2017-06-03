@@ -12,7 +12,9 @@ if '%errorlevel%' == '0' (
 )
 
 :: Choco
-powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+if NOT EXIST "%ALLUSERSPROFILE%\chocolatey\" (
+    powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+)
 
 :: Programs
 choco install -y git && SET "PATH=%PATH%;%ProgramFiles%\Git\cmd"
@@ -26,7 +28,7 @@ for /F "usebackq tokens=1" %%i in (`powershell "(Get-Date).ToString('yyy-MMdd-HH
 :: Ensure configFiles directory exists. If needed, clone repo.
 if NOT EXIST "configFiles\" (
     :: todo: path hardcoding is a bad idea
-    git clone https://github.com/sdolenc/winTools.git %tmp%\%dateString% && cd /D %tmp%\%dateString%\oneTimeSticky
+    git clone https://github.com/sdolenc/winTools.git -b npp %tmp%\%dateString% && cd /D %tmp%\%dateString%\oneTimeSticky
 )
 
 :: allow "edge" from run box
